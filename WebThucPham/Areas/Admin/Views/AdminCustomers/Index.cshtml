@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<WebThucPham.Models.Customer>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="@Url.Action("Index","AdminHome", new { area = "Admin"})" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách khách hàng: page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Catergory</option>
+                            <option value="all">All</option>
+                            <option value="homeDeco">Home Decoration</option>
+                            <option value="eletronic">Eletronic</option>
+                            <option value="jewellery">Jewellery</option>
+                        </select>
+                    </div>
+                    <div class="m-b-10">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Status</option>
+                            <option value="all">All</option>
+                            <option value="inStock">In Stock </option>
+                            <option value="outOfStock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a href="@Url.Action("Create","AdminCustomers", new { area = "Admin"})" class="btn btn-primary"> <i class="anticon anticon-plus-circle m-r-5"></i>Tạo tài khoản mới</a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ và tên</th>
+                        <th>Liên hệ</th>
+                        <th>Địa chỉ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.ID">
+                                <td>@item.ID</td>
+                                <td>
+                                    @item.FullName
+                                </td>
+                                <td>
+                                    <p>@item.PhoneNumber</p>
+                                    <p>@item.Email</p>
+                                </td>
+                                <td>Hồ Chí Minh</td>
+                                <td>
+                                    <a class="btn btn-info btn-tone btn-sm" href="@Url.Action("Details","AdminCustomers", new { area = "Admin", id = item.ID})">Xem</a>
+                                    <a class="btn btn-warning btn-tone btn-sm" href="@Url.Action("Edit","AdminCustomers", new { area = "Admin", id = item.ID})">Sửa</a>
+                                    <a class="btn btn-danger btn-tone btn-sm btnDelete" data-id="@item.ID" href="#">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div id="container">
+                <div class="pagination" style="">
+                    <div style="padding : 8px 16px">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                        of @Model.PageCount
+                    </div>
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/Admin/AdminCustomers/Delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

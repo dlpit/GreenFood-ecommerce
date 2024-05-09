@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebThucPham.Models.Account>
+
+@{
+    ViewBag.Title = "Danh sách tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="@Url.Action("Index","AdminHome", new { area = "Admin"})" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        @Html.DropDownList("idrole", (IEnumerable<SelectListItem>)ViewBag.QuyenTruyCap, "Chọn quyền truy cập", htmlAttributes: new { @class = "custom-select", style = "min-width: 300px;" })
+                        @*@Html.DropDownList("List_Roles", ViewBag.List_Roles as SelectList, "Quyền truy cập", htmlAttributes: new { @class = "custom-select", style = "min-width: 180px;"})*@
+                    </div>
+                    <div class="m-b-10">
+                        @Html.DropDownList("idstatus", (IEnumerable<SelectListItem>)ViewBag.lsTrangThai, "Chọn trạng thái", htmlAttributes: new { @class = "custom-select", style = "min-width: 250px;" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Lần đăng nhập cuối</th>
+                        <th>Quyền truy cập</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ID
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.FullName</h6>
+                                    </div>
+                                </td>
+                                <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.CreateAt</td>
+                                <td>@item.Role.Describe</td>
+                                <td>
+                                    @if (item.Active == true)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Active</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Disable</div>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-info btn-tone btn-xs" href="@Url.Action("Details","AdminAccounts", new { area = "Admin", id = item.ID})">Xem</a>
+                                    <a class="btn btn-warning btn-tone btn-xs" href="@Url.Action("Edit","AdminAccounts", new { area = "Admin", id = item.ID})">Sửa</a>
+                                    <a class="btn btn-danger btn-tone btn-xs" href="@Url.Action("Delete","AdminAccounts", new { area = "Admin", id = item.ID})">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

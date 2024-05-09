@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NVL_NQHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_ID" Type="int" />
+    <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreateAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreateAt" Type="datetime" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="Avatar" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="32" />
+    <Property Name="LastLogin" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="150" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="ĐeliverypDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Oder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" />
+    <Property Name="OderDate" Type="datetime" />
+    <Property Name="DeliveryDate" Type="datetime" />
+    <Property Name="Status_Oder" Type="int" />
+    <Property Name="Cancel" Type="bit" />
+    <Property Name="Paid" Type="bit" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentID" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="OderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Oder_ID" Type="int" />
+    <Property Name="Product_ID" Type="int" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="DeliveryDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Describe" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cat_ID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Video" Type="nvarchar" MaxLength="50" />
+    <Property Name="BestSeller" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Instock" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Describe" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="StatusOder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Account__Role_ID__267ABA7A">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__Customer_I__33D4B598">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__PaymentID__35BCFE0A">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="PaymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__Status_Ode__34C8D9D1">
+    <End Role="StatusOder" Type="Self.StatusOder" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="Status_Oder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OderDetai__Oder___38996AB5">
+    <End Role="Oder" Type="Self.Oder" Multiplicity="0..1" />
+    <End Role="OderDetail" Type="Self.OderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OderDetail">
+        <PropertyRef Name="Oder_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OderDetai__Produ__398D8EEE">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OderDetail" Type="Self.OderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OderDetail">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Cat_ID__2D27B809">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Cat_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NVL_NQHModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oder" EntityType="Self.Oder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OderDetail" EntityType="Self.OderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatusOder" EntityType="Self.StatusOder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Account__Role_ID__267ABA7A" Association="Self.FK__Account__Role_ID__267ABA7A">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__Customer_I__33D4B598" Association="Self.FK__Oder__Customer_I__33D4B598">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Oder" EntitySet="Oder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__PaymentID__35BCFE0A" Association="Self.FK__Oder__PaymentID__35BCFE0A">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="Oder" EntitySet="Oder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__Status_Ode__34C8D9D1" Association="Self.FK__Oder__Status_Ode__34C8D9D1">
+      <End Role="StatusOder" EntitySet="StatusOder" />
+      <End Role="Oder" EntitySet="Oder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OderDetai__Oder___38996AB5" Association="Self.FK__OderDetai__Oder___38996AB5">
+      <End Role="Oder" EntitySet="Oder" />
+      <End Role="OderDetail" EntitySet="OderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OderDetai__Produ__398D8EEE" Association="Self.FK__OderDetai__Produ__398D8EEE">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OderDetail" EntitySet="OderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Cat_ID__2D27B809" Association="Self.FK__Product__Cat_ID__2D27B809">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

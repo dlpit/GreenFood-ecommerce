@@ -1,0 +1,16 @@
+﻿@using WebThucPham.Models;
+
+@{
+    dbDoAnEntities dBContext = new dbDoAnEntities();
+    List<Category> ListCategory = dBContext.Categories.ToList();
+}
+
+<ul class="widgets-tags">
+    @foreach (var item in ListCategory)
+    {
+        <li>
+            @Html.ActionLink(item.Name, "ListCat", "Product", new { @Id = item.ID }, null)
+        </li>
+    }
+
+</ul>

@@ -1,0 +1,49 @@
+﻿@{
+    var hight = (List<WebThucPham.Models.Product>)ViewBag.HighlightProducts;
+}
+
+@{
+    /*Định dạng theo tiền việt nam*/
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+@foreach (var item in hight)
+{
+    var url = "/Product/"+item.Category.Thumb+ "/chi-tiet-" + item.ID;
+    <div class="swiper-slide">
+        <div class="product-list-item">
+            <div class="product-img img-zoom-effect">
+                <a href="@url">
+                    <img class="img-full" src="@item.Image" alt="Product Images">
+                </a>
+            </div>
+            <div class="product-content">
+                <a class="product-name" href="@url">@item.Name</a>
+                <div class="price-box pb-1">
+                    <span class="new-price">@String.Format(format, "{0:c0}", item.Price)</span>
+                </div>
+                <div class="rating-box-wrap">
+                    <div class="rating-box">
+                        <ul>
+                            <li><i class="pe-7s-star"></i></li>
+                            <li><i class="pe-7s-star"></i></li>
+                            <li><i class="pe-7s-star"></i></li>
+                            <li><i class="pe-7s-star"></i></li>
+                            <li><i class="pe-7s-star"></i></li>
+                        </ul>
+                    </div>
+                    <div class="product-add-action">
+                        <ul>
+                            <li>
+                                <a href="cart.html" class="btnAddToCart" data-id="@item.ID">
+                                    <i class="pe-7s-cart"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

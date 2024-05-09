@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebThucPham.ExtendAll.ShoppingCartItem>
+@{
+    /*Định dạng theo tiền việt nam*/
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th class="cart-product-name">Sản Phẩm</th>
+            <th class="cart-product-total">Tổng Giá</th>
+        </tr>
+    </thead>
+    @{
+        decimal sum = 0;
+    }
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr class="cart_item">
+                    <td class="cart-product-name">
+                        @item.ProductName<strong class="product-quantity">
+                            × @item.Quantity
+                        </strong>
+                    </td>
+                    @{
+                        decimal sumSingle = item.Quantity * item.Price;
+                    }
+                    <td class="cart-product-total"><span class="amount">@String.Format(format, "{0:c0}", sumSingle)</span></td>
+                </tr>
+                sum += item.Quantity * item.Price;
+            }
+        }
+
+    </tbody>
+    <tfoot>
+        <tr class="order-total">
+            <th>Số Tiền Phải Trả</th>
+            <td><strong><span class="amount">@String.Format(format, "{0:c0}", sum)</span></strong></td>
+        </tr>
+    </tfoot>
+</table>

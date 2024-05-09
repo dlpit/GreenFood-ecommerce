@@ -1,0 +1,39 @@
+﻿@{
+    var blogViral = (List<WebThucPham.Models.Blog>)ViewBag.BlogViral;
+}
+
+@foreach (var item in blogViral)
+{
+    <div class="swiper-slide">
+        <div class="blog-item" style="height: 660px">
+            <div class="blog-img img-zoom-effect">
+                <a href="blog-detail-left-sidebar.html">
+                    <img class="img-full" style="width:360px; height: 306px;" src="@item.Image" alt="Blog Image">
+                </a>
+            </div>
+            <div class="blog-content">
+                <div class="blog-meta text-dim-gray pb-3">
+                    <ul>
+                        <li class="date"><i class="fa fa-calendar-o me-2"></i>@item.CreateAt.Value.ToString("dd/MM/yyyy")</li>
+                        <li>
+                            <span class="comments me-3">
+                                <a href="javascript:void(0)">2 Bình Luận</a>
+                            </span>
+                            <span class="link-share">
+                                <a href="javascript:void(0)">Chia Sẻ</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <h5 class="title mb-4">
+                    <a href="blog-detail-left-sidebar.html">@item.Title</a>
+                </h5>
+                <p class="short-desc mb-5" style="height: 80px; overflow: hidden" >@Html.Raw(item.Content)</p>
+                <div class="button-wrap">
+                    <a class="btn btn-custom-size btn-dark btn-lg rounded-0" href="blog-detail-left-sidebar.html">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

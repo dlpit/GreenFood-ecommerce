@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="737f0c0bf5454225b46798f07caf6efc" Name="Diagram1">
+        <EntityTypeShape EntityType="dbDoAnModel.Account" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Blog" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Category" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Customer" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Delivery" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Payment" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Product" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.Role" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDoAnModel.StatusOrder" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="dbDoAnModel.FK__Account__Role_ID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__Product__Cat_ID__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__Order__Customer___38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__Order__Payment_I__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__Order__Status__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__OrderDeta__Order__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="dbDoAnModel.FK__OrderDeta__Produ__412EB0B6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

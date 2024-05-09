@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebThucPham.ExtendAll.ShoppingCartItem>
+@{
+    /*Định dạng theo tiền việt nam*/
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<div class="col-12">
+    @{
+        decimal sum = 0;
+    }
+    <form action="javascript:void(0)">
+        <div class="table-content table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="product_remove">STT</th>
+                        <th class="product-thumbnail">Ảnh Sản Phẩm</th>
+                        <th class="cart-product-name">Tên</th>
+                        <th class="product-price">Danh Mục</th>
+                        <th class="product-quantity">Số Lượng</th>
+                        <th class="product-subtotal">Giá</th>
+                        <th class="product_remove">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 0;
+                        foreach (var item in Model)
+                        {
+                            <tr id="trow_@item.ProductId">
+                                <td class="product-price">
+                                    <a href="javascript:void(0)">
+                                        <span class="amount">@(i + 1)</span>
+                                    </a>
+                                </td>
+                                <td class="product-thumbnail">
+                                    <a href="javascript:void(0)">
+                                        <img src="@item.ProductImg" style="width:112px; height: 124px" alt="Cart Thumbnail">
+                                    </a>
+                                </td>
+                                <td class="product-name"><a href="/Product/@item.CategoryThumb/chi-tiet-@item.ProductId">@item.ProductName</a></td>
+                                <td class="product-price"><span class="amount">@item.CategoryName</span></td>
+                                <td class="quantity" style="width: 120px;">
+                                    <a href="javascript:void(0)">
+                                        <span class="amount"><input type="number" id="Quantity_@item.ProductId" value="@item.Quantity" /></span>
+                                    </a>
+                                </td>
+                                <td class="product-subtotal"><span class="amount">@String.Format(format, "{0:c0}", item.TotalPrice)</span></td>
+                                <td class="product_remove">
+                                    <a href="javascript:void(0)" data-id="@item.ProductId" class="btnDelete">
+                                        <i class="pe-7s-close" title="Remove"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" data-id="@item.ProductId" class="btnUpdate">
+                                        <i class="pe-7s-refresh" title="Refresh"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            i++;
+                            sum += item.Quantity * item.Price;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="product-price" colspan="7">
+                                <span class="amount">Không có sản phẩm trong giỏ hàng.</span>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="coupon-all">
+                    <div class="coupon2">
+                        <input class="button btnDeleteAll" name="update_cart" value="Xóa Tất Cả" type="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 ml-auto">
+                <div class="cart-page-total">
+                    <h2>Tổng Tiền</h2>
+                    <ul>
+                        <li>Phải thanh toán <span>@String.Format(format, "{0:c0}", sum)</span></li>
+                    </ul>
+                    <a href="/thanh-toan">Đến Trang Thanh Toán</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

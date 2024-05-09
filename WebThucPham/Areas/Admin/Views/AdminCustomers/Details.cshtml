@@ -1,0 +1,79 @@
+﻿@model WebThucPham.Models.Customer
+
+@{
+    ViewBag.Title = "Chi tiết khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="@Url.Action("Index","AdminHome", new { area = "Admin"})" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="@Url.Action("Index","AdminCustomers", new { area = "Admin"})">Danh sách khách hàng</a>
+            <span class="breadcrumb-item active">Chi tiết khách hàng > @Model.FullName</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Chi tiết khách hàng</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Tên</td>
+                        <td class="text-dark font-weight-semibold">@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày sinh</td>
+                        <td>@Model.BirthDay</td>
+                    </tr>
+
+                    <tr>
+                        <td>Avatar</td>
+                        <td>@Html.Raw(Model.Avatar)</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Mật khẩu</td>
+                        <td>@Model.Password</td>
+                    </tr>
+                    <tr>
+                        <td>Lần đăng nhập cuối</td>
+                        <td>@Model.LastLogin</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái tài khoản</td>
+                        <td>
+                            @if (Model.Active == true)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                    <div>Active</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-danger badge-dot m-r-10"></div>
+                                    <div>Disable</div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@Html.ActionLink("Cập nhật tài khoản này", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-tone" })

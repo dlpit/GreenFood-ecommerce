@@ -1,0 +1,183 @@
+﻿@model PagedList.IPagedList<WebThucPham.Models.Blog>
+@using PagedList.Mvc;
+
+@{
+    var lsBlogs = (List<WebThucPham.Models.Blog>)ViewBag.ViewBlogs;
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height"
+         data-bg-image="assets/images/breadcrumb/bg/1-1-1920x373.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h2 class="breadcrumb-heading">Tin Tức</h2>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Index","Home")">
+                                    Trang Chủ <i class="pe-7s-angle-right"></i>
+                                </a>
+                            </li>
+                            <li>Danh Sách Tin Tức</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blog-area blog-column-2 section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 pt-6">
+                    <div class="blog-item">
+                        <div class="ratio ratio-16x9">
+                            <iframe width="100%"
+                                    height="310"
+                                    scrolling="no"
+                                    frameborder="no"
+                                    allow="autoplay"
+                                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1056842599&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta text-dim-gray pb-3">
+                                <ul>
+                                    <li class="date">
+                                        <i class="fa fa-calendar-o me-2"></i>May 21, 2021
+                                    </li>
+                                    <li>
+                                        <span class="comments me-3">
+                                            <a href="javascript:void(0)">2 Comments</a>
+                                        </span>
+                                        <span class="link-share">
+                                            <a href="javascript:void(0)">Share</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h5 class="title mb-4">
+                                <a href="https://soundcloud.com/ho-l-c-698372174/yours-chanyeol-x-raiden-x">Âm nhạc</a>
+                            </h5>
+                            <p class="short-desc mb-5">
+                                Lorem ipsum dolor sit amet, consectet adipi elit, sed do
+                                eius tempor incididunt ut labore gthydolore magna aliqua.
+                            </p>
+                            <div class="button-wrap">
+                                <a class="btn btn-custom-size lg-size btn-dark rounded-0"
+                                   href="https://soundcloud.com/ho-l-c-698372174/yours-chanyeol-x-raiden-x">Đọc Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pt-6">
+                    <div class="blog-item">
+                        <div class="ratio ratio-16x9">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/ByXL5WCSXys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta text-dim-gray pb-3">
+                                <ul>
+                                    <li class="date">
+                                        <i class="fa fa-calendar-o me-2"></i>May 21, 2021
+                                    </li>
+                                    <li>
+                                        <span class="comments me-3">
+                                            <a href="javascript:void(0)">2 Comments</a>
+                                        </span>
+                                        <span class="link-share">
+                                            <a href="javascript:void(0)">Share</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h5 class="title mb-4">
+                                <a href="https://www.youtube.com/embed/ByXL5WCSXys">Video</a>
+                            </h5>
+                            <p class="short-desc mb-5">
+                                Lorem ipsum dolor sit amet, consectet adipi elit, sed do
+                                eius tempor incididunt ut labore gthydolore magna aliqua.
+                            </p>
+                            <div class="button-wrap">
+                                <a class="btn btn-custom-size lg-size btn-dark rounded-0"
+                                   href="https://www.youtube.com/embed/ByXL5WCSXys">Đọc Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var item in lsBlogs)
+                {
+                    var url = "/Blog" + "/chi-tiet-tin-tuc-" + item.ID;
+                    <div class="col-md-6" style="padding-top: 24px;">
+                        <div class="blog-item" style="height:850px;">
+                            <div class="blog-img img-zoom-effect">
+                                <a href="blog-detail-left-sidebar.html">
+                                    <img class="img-full"
+                                         style="width: 555px; height:472px;"
+                                         src="@item.Image"
+                                         alt="Blog Image" />
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta text-dim-gray pb-3">
+                                    <ul>
+                                        <li class="date">
+                                            <i class="fa fa-calendar-o me-2"></i>@item.CreateAt
+                                        </li>
+                                        <li>
+                                            <span class="comments me-3">
+                                                <a href="javascript:void(0)">2 Comments</a>
+                                            </span>
+                                            <span class="link-share">
+                                                <a href="javascript:void(0)">Share</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h5 class="title mb-4">
+                                    <a href="blog-detail-left-sidebar.html">@item.Title</a>
+                                </h5>
+                                <p class="short-desc mb-5" style=" height: 55px; overflow: hidden;">
+                                    @Html.Raw(item.Content)
+                                </p>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-dark rounded-0"
+                                        href="@url">Đọc Ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+                <div class="col-lg-12">
+                    <div class="pagination-area pt-10">
+                        <nav style="font-size: 14px;" aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li style="color: #bebf64;" class="page-item">
+                                    <div id="container">
+                                        <div class="pagination" style="">
+                                            <div style="padding : 8px 16px">
+                                                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                của @Model.PageCount
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="page-item">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->

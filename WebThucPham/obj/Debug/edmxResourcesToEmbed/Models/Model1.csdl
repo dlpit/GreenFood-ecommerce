@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NVL_NQHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_ID" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreateAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Account__Role_ID__267ABA7A" FromRole="Account" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Cat_ID__2D27B809" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="Avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Oders" Relationship="Self.FK__Oder__Customer_I__33D4B598" FromRole="Customer" ToRole="Oder" />
+  </EntityType>
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Company" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ĐeliverypDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Oder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_ID" Type="Int32" />
+    <Property Name="OderDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="Status_Oder" Type="Int32" />
+    <Property Name="Cancel" Type="Boolean" />
+    <Property Name="Paid" Type="Boolean" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentID" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Oder__Customer_I__33D4B598" FromRole="Oder" ToRole="Customer" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK__Oder__PaymentID__35BCFE0A" FromRole="Oder" ToRole="Payment" />
+    <NavigationProperty Name="StatusOder" Relationship="Self.FK__Oder__Status_Ode__34C8D9D1" FromRole="Oder" ToRole="StatusOder" />
+    <NavigationProperty Name="OderDetails" Relationship="Self.FK__OderDetai__Oder___38996AB5" FromRole="Oder" ToRole="OderDetail" />
+  </EntityType>
+  <EntityType Name="OderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Oder_ID" Type="Int32" />
+    <Property Name="Product_ID" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Oder" Relationship="Self.FK__OderDetai__Oder___38996AB5" FromRole="OderDetail" ToRole="Oder" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OderDetai__Produ__398D8EEE" FromRole="OderDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Describe" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Oders" Relationship="Self.FK__Oder__PaymentID__35BCFE0A" FromRole="Payment" ToRole="Oder" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cat_ID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BestSeller" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Instock" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Cat_ID__2D27B809" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OderDetails" Relationship="Self.FK__OderDetai__Produ__398D8EEE" FromRole="Product" ToRole="OderDetail" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Describe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Role_ID__267ABA7A" FromRole="Role" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="StatusOder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Oders" Relationship="Self.FK__Oder__Status_Ode__34C8D9D1" FromRole="StatusOder" ToRole="Oder" />
+  </EntityType>
+  <Association Name="FK__Account__Role_ID__267ABA7A">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Cat_ID__2D27B809">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Cat_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__Customer_I__33D4B598">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__PaymentID__35BCFE0A">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="PaymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oder__Status_Ode__34C8D9D1">
+    <End Role="StatusOder" Type="Self.StatusOder" Multiplicity="0..1" />
+    <End Role="Oder" Type="Self.Oder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Oder">
+        <PropertyRef Name="Status_Oder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OderDetai__Oder___38996AB5">
+    <End Role="Oder" Type="Self.Oder" Multiplicity="0..1" />
+    <End Role="OderDetail" Type="Self.OderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OderDetail">
+        <PropertyRef Name="Oder_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OderDetai__Produ__398D8EEE">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OderDetail" Type="Self.OderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OderDetail">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WebGreenFoodEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Deliveries" EntityType="Self.Delivery" />
+    <EntitySet Name="Oders" EntityType="Self.Oder" />
+    <EntitySet Name="OderDetails" EntityType="Self.OderDetail" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="StatusOders" EntityType="Self.StatusOder" />
+    <AssociationSet Name="FK__Account__Role_ID__267ABA7A" Association="Self.FK__Account__Role_ID__267ABA7A">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Cat_ID__2D27B809" Association="Self.FK__Product__Cat_ID__2D27B809">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__Customer_I__33D4B598" Association="Self.FK__Oder__Customer_I__33D4B598">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Oder" EntitySet="Oders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__PaymentID__35BCFE0A" Association="Self.FK__Oder__PaymentID__35BCFE0A">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="Oder" EntitySet="Oders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oder__Status_Ode__34C8D9D1" Association="Self.FK__Oder__Status_Ode__34C8D9D1">
+      <End Role="StatusOder" EntitySet="StatusOders" />
+      <End Role="Oder" EntitySet="Oders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OderDetai__Oder___38996AB5" Association="Self.FK__OderDetai__Oder___38996AB5">
+      <End Role="Oder" EntitySet="Oders" />
+      <End Role="OderDetail" EntitySet="OderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OderDetai__Produ__398D8EEE" Association="Self.FK__OderDetai__Produ__398D8EEE">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OderDetail" EntitySet="OderDetails" />
+    </AssociationSet>
+    <EntitySet Name="Blogs" EntityType="NVL_NQHModel.Blog" />
+    <EntitySet Name="sysdiagrams" EntityType="NVL_NQHModel.sysdiagram" />
+  </EntityContainer>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateAt" Type="DateTime" Precision="3" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

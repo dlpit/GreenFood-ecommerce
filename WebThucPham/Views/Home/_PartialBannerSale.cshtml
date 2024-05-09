@@ -1,0 +1,31 @@
+﻿@{
+    var slides = (List<WebThucPham.Models.Product>)ViewBag.BannerSale;
+}
+
+
+@foreach (var item in slides)
+{
+    <div class="col-lg-4 col-md-6">
+        <div class="banner-item">
+            <div class="banner-img img-zoom-effect">
+                <img class="img-full"
+                     src="@item.Image"
+                     style="width: 360px; height: 243px;"
+                     alt="Banner Image" />
+                <div class="inner-content">
+                    @{
+                        var results = ((float)item.Discount / (float)item.Price) * 100;
+                        var decima = (int)results;
+                    }
+                    <h5 class="offer" style="color:#000000;">@decima % Off</h5>
+                    <h4 class="title mb-5" style="color:#bf8c1e;">@item.Name<br />@item.Category.Name</h4>
+                    <div class="button-wrap">
+                        <a class="btn btn-primary btn-white-hover rounded-0"
+                           href="@Url.Action("Index","Product")">Đi Đến</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

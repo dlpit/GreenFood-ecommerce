@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebThucPham.Models.Role>
+
+@{
+    ViewBag.Title = "Danh sách quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Tác vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <a class="btn btn-primary btn-xs" href="@Url.Action("Create","AdminRoles", new { area = "Admin"})">Tạo tài khoản truy cập</a>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ID</th>
+                        <td>@item.Name</td>
+                        <td>@item.Describe</td>
+                        <td>
+                            <a class="btn btn-info btn-tone btn-xs" href="@Url.Action("Details","AdminRoles", new { area = "Admin", id = item.ID})">Xem</a>
+                            <a class="btn btn-warning btn-tone btn-xs" href="@Url.Action("Edit","AdminRoles", new { area = "Admin", id = item.ID})">Sửa</a>
+                            <a class="btn btn-danger btn-tone btn-xs" href="@Url.Action("Delete","AdminRoles", new { area = "Admin", id = item.ID})">Xóa</a>
+                        </td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+            </table>
+        </div>

@@ -1,0 +1,108 @@
+﻿@using WebThucPham.Models
+
+@{
+    /*Định dạng theo tiền việt nam*/
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<ul class="nav product-tab-nav pb-10" id="myTab" role="tablist">
+    @{
+        int countActive1 = 0;
+        foreach (Category item in ProCatHome.getCategory())
+        {
+            <li class="nav-item" role="presentation">
+                <a id="@item.Thumb-tab" class="@(countActive1++ == 0 ? "active" : "")"
+                   data-bs-toggle="tab"
+                   href="#@item.Thumb"
+                   role="tab"
+                   aria-controls="@item.Thumb"
+                   aria-selected="false">
+                    <div class="product-tab-icon">
+                        <img src="~/assets/images/product/icon/2.png"
+                             alt="Product Icon" />
+                    </div>
+                    @item.Name
+                </a>
+            </li>
+        }
+    }
+</ul>
+<div class="tab-content" id="myTabContent">
+    @{
+        int countActive2 = 0;
+        foreach (Category items in ProCatHome.getCategory())
+        {
+            <div class="tab-pane fade show @(countActive2++ == 0 ? "active" : "")"
+                 id="@items.Thumb"
+                 role="tabpanel"
+                 aria-labelledby="@items.Thumb-tab">
+                <div class="product-item-wrap row">
+                    @{
+                        var count = 1;
+
+
+                        foreach (Product item in ProCatHome.getProductInCat(items.ID))
+                        {
+                            var url = "/Product/" + item.Category.Thumb + "/chi-tiet-" + item.ID;
+                            <div class="col-xl-3 col-lg-4 col-sm-6 pt-6 pt-xl-0">
+                                <div class="product-item">
+                                    <div class="product-img img-zoom-effect">
+                                        <a href="@url">
+                                            <img style="width: 263px; height: 292px; padding-top: 1.875rem" class="img-full"
+                                                 src="@item.Image"
+                                                 alt="" />
+                                        </a>
+                                        <div class="product-add-action">
+                                            <ul>
+                                                <li>
+                                                    <a href="cart.html" class="btnAddToCart" data-id="@item.ID">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="compare.html">
+                                                        <i class="pe-7s-shuffle"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="wishlist.html">
+                                                        <i class="pe-7s-like"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <a class="product-name" href="@url">@item.Name</a>
+                                        <div class="price-box pb-1">
+                                            @if (item.Discount != 0)
+                                            {
+                                                <span style="text-decoration: line-through; font-size: 14px;" class="new-price">@String.Format(format, "{0:c0}", item.Price)</span>
+                                                <span class="new-price">@String.Format(format, "{0:c0}", item.Discount)</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="new-price">@String.Format(format, "{0:c0}", item.Price)</span>
+                                            }
+                                        </div>
+                                        <div class="rating-box">
+                                            <ul>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            if (count++ == 8) { break; }
+                        }
+                    }
+                </div>
+            </div>
+        }
+    }
+
+</div>

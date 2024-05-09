@@ -1,0 +1,82 @@
+﻿@model WebThucPham.Models.Account
+
+@{
+    ViewBag.Title = "Xóa tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="@Url.Action("Index","AdminHome", new { area = "Admin"})" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="@Url.Action("Index","AdminAccounts", new { area = "Admin"})">Danh sách quyền truy cập</a>
+            <span class="breadcrumb-item active">Xóa tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title text-danger">Are you sure you want to delete this?</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.ID</td>
+                    </tr>
+                    <tr>
+                        <td>Tên đăng nhập</td>
+                        <td>@Model.UserName</td>
+                    </tr>
+                    <tr>
+                        <td>Mật khẩu</td>
+                        <td>@Model.Password</td>
+                    </tr>
+                    <tr>
+                        <td>Tên đầy đủ</td>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Active</td>
+                        <td>@Model.Active</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày tạo</td>
+                        <td>@Model.CreateAt</td>
+                    </tr>
+                    <tr>
+                        <td>Quyền truy cập</td>
+                        <td>@Model.Role.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Xác nhận</td>
+                        <td>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Xóa" class=" btn btn-danger btn-sm"
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
